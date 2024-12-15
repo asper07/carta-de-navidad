@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Interactiva de Navidad</title>
+    <style>
+        /* Estilos generales */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+            color: #fff;
+            text-align: center;
+        }
+        /* Fondo con la cabaña en el bosque nevado */
+        body {
+            background: url('https://img.freepik.com/fotos-premium/cabana-bosque-nieve-techo_915367-15665.jpg') no-repeat center center fixed; /* Nueva imagen de fondo */
+            background-size: cover;
+        }
+
+        /* Copos de nieve */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #fff;
+            font-size: 1.5em;
+            animation: fall linear infinite;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Copo de nieve interactivo */
+        #interactive-snowflake {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: #fff;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) translate(-50%, -50%); }
+            50% { transform: scale(1.2) translate(-50%, -50%); }
+        }
+
+        /* Popup mensaje */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.2em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #close-btn {
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Copos de nieve cayendo -->
+    <script>
+        function createSnowflakes() {
+            for (let i = 0; i < 30; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+                snowflake.style.opacity = Math.random();
+                snowflake.style.fontSize = Math.random() * 20 + 10 + 'px';
+                document.body.appendChild(snowflake);
+            }
+        }
+        createSnowflakes();
+    </script>
+
+    <!-- Copo interactivo -->
+    <div id="interactive-snowflake" onclick="showMessage()">❄</div>
+
+    <!-- Popup de mensaje -->
+    <div id="popup">
+        <p>🎁 ¡Este es mi deseo de Navidad! 🎁</p>
+        <p>Si quieren lucirse... un poco de dinero 💵 nunca está de más,</p>
+        <p>y si me quieren sorprender aún más, unas repisas para mi cuarto quedarían perfectas. 🛠️✨</p>
+        <p>Con cariño, ¡gracias por todo! 🎄</p>
+        <p id="close-btn" onclick="hideMessage()">Cerrar</p>
+    </div>
+
+    <!-- Script para mostrar y ocultar el mensaje -->
+    <script>
+        function showMessage() {
+            document.getElementById('popup').style.display = 'block';
+        }
+        function hideMessage() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
